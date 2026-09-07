@@ -4,19 +4,29 @@ import React, { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import rawNames from "@/data/names.json";
 import { NameItem } from "@/types/name";
-import { NameSearch } from "@/components/names/NameSearch";
 import { GenderFilter, FilterGender } from "@/components/names/GenderFilter";
 import { AlphabetFilter } from "@/components/names/AlphabetFilter";
 import { NameList } from "@/components/names/NameList";
 import { Button } from "@/components/ui/Button";
 import { createNameSearchIndex } from "@/lib/search";
-import { Sparkles, Compass, ChevronDown, Dices, RotateCcw } from "lucide-react";
+import { useTranslation } from "@/store/useLocaleStore";
+import {
+  Sparkles,
+  Compass,
+  ChevronDown,
+  Dices,
+  RotateCcw,
+  Search,
+  X,
+} from "lucide-react";
 
 const allNames: NameItem[] = rawNames as NameItem[];
 const PAGE_SIZE = 36;
 
 export default function HomePage() {
   const router = useRouter();
+  const { t } = useTranslation();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGender, setSelectedGender] = useState<FilterGender>("all");
   const [selectedLetter, setSelectedLetter] = useState("");
@@ -67,7 +77,7 @@ export default function HomePage() {
     return result;
   }, [searchQuery, selectedGender, selectedLetter, searchIndex]);
 
-  // Set of letters available in the current search + gender filter
+  // Set of letters available in current search + gender filter
   const availableLetters = useMemo(() => {
     let pool = allNames;
     if (selectedGender !== "all") {
@@ -99,76 +109,88 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
-      {/* Hero Section */}
-      <section className="relative mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-slate-900 p-8 text-white shadow-xl sm:p-12">
-        <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-emerald-100 backdrop-blur-md mb-4">
-            <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
-            <span>Феҳристи расмии номҳои тоҷикӣ</span>
-          </div>
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-            Номи бомаъно ва зебо барои фарзанди шумо
-          </h1>
-          <p className="mt-4 text-sm text-emerald-100/90 sm:text-base leading-relaxed">
-            Ҳазорҳо номи асили тоҷикӣ (феҳристи расмии дорои {allNames.length} ном) бо
-            тафсири маъно, реша ва мутобиқат ба меъёрҳои миллии номгузорӣ.
-          </p>
+      {/* Minimalist Textual Hero Section */}
+      <section className="text-center pt-4 pb-8 sm:pt-8 sm:pb-12">
+        {/* Subtle pill badge */}
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/40 px-3.5 py-1 text-xs font-medium text-emerald-400 border border-emerald-800/40 mb-4 shadow-xs">
+          <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
+          <span>{t("heroBadge")}</span>
         </div>
 
-        {/* Decorative background glow */}
-        <div className="pointer-events-none absolute -right-12 -bottom-12 h-64 w-64 rounded-full bg-emerald-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute right-24 top-0 h-48 w-48 rounded-full bg-teal-300/15 blur-2xl" />
+        {/* H1 Heading */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight sm:leading-tight">
+          {t("heroTitle")}
+        </h1>
+
+        {/* Subtitle with dynamic name count */}
+        <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto mt-3.5 leading-relaxed">
+          {t("heroDesc", { count: allNames.length.toLocaleString() })}
+        </p>
       </section>
 
-      {/* Filter and Search Bar Controls */}
-      <section className="mb-8 space-y-4">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex-1">
-            <NameSearch
+      {/* Monolithic Search and Filter Bar */}
+      <section className="mb-6 space-y-4">
+        <div className="flex flex-col md:flex-row items-stretch rounded-2xl border border-zinc-800/90 bg-zinc-900/80 p-1.5 shadow-2xl backdrop-blur-md focus-within:border-zinc-700 transition-all gap-2 md:gap-0">
+          {/* Search Input */}
+          <div className="relative flex-1 flex items-center">
+            <Search className="absolute left-3.5 h-4 w-4 text-zinc-500 pointer-events-none" />
+            <input
+              type="text"
               value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Ҷустуҷӯ аз рӯи ном ё овонавишт..."
+              onChange={(e) => handleSearchChange(e.target.value)}
+              placeholder={t("searchPlaceholder")}
+              className="w-full bg-transparent pl-10 pr-9 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => handleSearchChange("")}
+                className="absolute right-2.5 p-1 rounded-full text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+                aria-label="Clear search"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Desktop divider */}
+          <div className="hidden md:block w-px bg-zinc-800 my-1 mx-2" />
+
+          {/* Controls: Gender Filter + Random Button */}
+          <div className="flex items-center justify-between md:justify-end gap-2 pt-1 md:pt-0 border-t md:border-t-0 border-zinc-800/80">
             <GenderFilter value={selectedGender} onChange={handleGenderChange} />
 
-            {/* Randomizer Button */}
-            <Button
-              variant="secondary"
-              size="md"
+            <button
+              type="button"
               onClick={handleRandomName}
-              className="gap-2 shrink-0 border border-slate-200/80 bg-white hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 shadow-xs"
-              title="Номи тасодуфӣ"
+              className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-850 px-3 text-xs font-semibold text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all active:scale-95 shadow-xs select-none shrink-0"
+              title={t("random")}
             >
-              <Dices className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-              <span className="hidden sm:inline">Номи тасодуфӣ</span>
-            </Button>
+              <Dices className="h-4 w-4 text-emerald-400" />
+              <span className="hidden sm:inline">{t("random")}</span>
+            </button>
           </div>
         </div>
 
         {/* Alphabet Filter */}
-        <div className="pt-1">
-          <AlphabetFilter
-            selectedLetter={selectedLetter}
-            onSelectLetter={handleLetterChange}
-            availableLetters={availableLetters}
-          />
-        </div>
+        <AlphabetFilter
+          selectedLetter={selectedLetter}
+          onSelectLetter={handleLetterChange}
+          availableLetters={availableLetters}
+        />
 
-        {/* Counter Info Bar */}
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-3 pt-1 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
+        {/* Info & Counter Bar */}
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3 pt-1 text-xs text-zinc-400">
           <div className="flex items-center gap-1.5">
-            <Compass className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+            <Compass className="h-3.5 w-3.5 text-emerald-400" />
             <span>
-              Номҳои ёфтшуда:{" "}
-              <strong className="text-slate-800 dark:text-slate-200">
+              {t("foundCount")}:{" "}
+              <strong className="text-white">
                 {filteredNames.length}
               </strong>
               {selectedLetter && (
-                <span className="ml-1 text-slate-400">
-                  (ҳарфи «{selectedLetter}»)
+                <span className="ml-1 text-zinc-500">
+                  ({t("letter")} «{selectedLetter}»)
                 </span>
               )}
             </span>
@@ -178,10 +200,10 @@ export default function HomePage() {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-1 font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+              className="inline-flex items-center gap-1 font-medium text-emerald-400 hover:underline"
             >
               <RotateCcw className="h-3 w-3" />
-              <span>Тоза кардани филтрҳо</span>
+              <span>{t("resetFilters")}</span>
             </button>
           )}
         </div>
@@ -198,19 +220,15 @@ export default function HomePage() {
         {filteredNames.length > PAGE_SIZE && (
           <div className="mt-12 flex flex-col items-center justify-center gap-3">
             {/* Indicator: Нишон дода шуд: X аз Y */}
-            <div className="flex flex-col items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex flex-col items-center gap-1.5 text-xs text-zinc-400">
               <p className="font-medium">
-                Нишон дода шуд:{" "}
-                <strong className="text-slate-800 dark:text-slate-200">
-                  {displayedNames.length}
-                </strong>{" "}
-                аз{" "}
-                <strong className="text-slate-800 dark:text-slate-200">
-                  {filteredNames.length}
-                </strong>
+                {t("shownCount", {
+                  current: displayedNames.length,
+                  total: filteredNames.length,
+                })}
               </p>
               {/* Sleek progress bar */}
-              <div className="h-1.5 w-48 overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-800">
+              <div className="h-1.5 w-48 overflow-hidden rounded-full bg-zinc-800">
                 <div
                   className="h-full rounded-full bg-emerald-500 transition-all duration-300"
                   style={{
@@ -231,10 +249,10 @@ export default function HomePage() {
                 variant="outline"
                 size="lg"
                 onClick={handleLoadMore}
-                className="mt-1 gap-2 rounded-2xl border-slate-300 px-8 py-2.5 font-semibold text-slate-800 hover:border-emerald-500 hover:bg-emerald-50/70 hover:text-emerald-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-emerald-500 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 shadow-xs transition-all active:scale-95"
+                className="mt-1 gap-2 rounded-2xl border-zinc-750 bg-zinc-900/80 px-8 py-2.5 font-semibold text-zinc-200 hover:border-zinc-600 hover:bg-zinc-850 hover:text-white shadow-xs transition-all active:scale-95"
               >
-                <span>Боз нишон додан</span>
-                <ChevronDown className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <span>{t("loadMore")}</span>
+                <ChevronDown className="h-4 w-4 text-emerald-400" />
               </Button>
             )}
           </div>

@@ -70,7 +70,7 @@ export default async function NameDetailPage({
       <div className="mb-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-emerald-400 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Баргаштан ба рӯйхати номҳо</span>
@@ -78,20 +78,20 @@ export default async function NameDetailPage({
       </div>
 
       {/* Main Detail Card */}
-      <article className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-10">
+      <article className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6 shadow-xl backdrop-blur-md sm:p-10">
         {/* Header section with Name and Actions */}
-        <div className="flex flex-col justify-between gap-6 border-b border-slate-100 pb-8 dark:border-slate-800/80 sm:flex-row sm:items-center">
+        <div className="flex flex-col justify-between gap-6 border-b border-zinc-800/80 pb-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4">
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-2xl font-bold text-white shadow-lg shadow-emerald-500/20">
               {nameItem.firstLetter || nameItem.name.charAt(0)}
             </span>
             <div>
               <div className="flex items-baseline gap-3">
-                <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                   {nameItem.name}
                 </h1>
                 {nameItem.translit && (
-                  <span className="font-mono text-base font-medium text-slate-400 dark:text-slate-500">
+                  <span className="font-mono text-base font-medium text-zinc-400">
                     {nameItem.translit}
                   </span>
                 )}
@@ -118,12 +118,12 @@ export default async function NameDetailPage({
         {/* Info Grid */}
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {/* Meaning Section */}
-          <div className="rounded-2xl bg-slate-50/80 p-5 dark:bg-slate-800/50 sm:col-span-2">
-            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+          <div className="rounded-2xl bg-zinc-850/60 p-5 border border-zinc-800/80 sm:col-span-2">
+            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
               <BookOpen className="h-4 w-4" />
               <span>Маъно ва мақоми ном</span>
             </div>
-            <p className="mt-2 text-base leading-relaxed text-slate-700 dark:text-slate-200">
+            <p className="mt-2 text-base leading-relaxed text-zinc-300">
               {nameItem.meaning ||
                 "Номи шомили феҳристи расмии миллии Ҷумҳурии Тоҷикистон буда, истифодаи он дар санадҳои расмӣ ва САҲШ тавсия шудааст."}
             </p>
@@ -131,35 +131,35 @@ export default async function NameDetailPage({
 
           {/* Translit / Latin spelling */}
           {nameItem.translit && (
-            <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <Globe className="h-4 w-4 text-sky-500" />
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-850/40 p-5">
+              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                <Globe className="h-4 w-4 text-sky-400" />
                 <span>Овонавишти лотинӣ</span>
               </div>
-              <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white font-mono">
+              <p className="mt-2 text-base font-semibold text-white font-mono">
                 {nameItem.translit}
               </p>
             </div>
           )}
 
           {/* Origin Section */}
-          <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              <Info className="h-4 w-4 text-emerald-500" />
+          <div className="rounded-2xl border border-zinc-800/80 bg-zinc-850/40 p-5">
+            <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              <Info className="h-4 w-4 text-emerald-400" />
               <span>Реша ва пайдоиш</span>
             </div>
-            <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white">
+            <p className="mt-2 text-base font-semibold text-white">
               {nameItem.origin || "Тоҷикӣ"}
             </p>
           </div>
 
           {/* Registry Status Section */}
-          <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800 sm:col-span-2">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              <ShieldCheck className="h-4 w-4 text-emerald-500" />
+          <div className="rounded-2xl border border-zinc-800/80 bg-zinc-850/40 p-5 sm:col-span-2">
+            <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              <ShieldCheck className="h-4 w-4 text-emerald-400" />
               <span>Мақоми ҳуқуқӣ ва реестри давлатӣ</span>
             </div>
-            <p className="mt-2 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <p className="mt-2 text-sm text-zinc-300 leading-relaxed">
               {nameItem.inRegistry
                 ? "Ба Феҳристи ягонаи миллии номҳои тоҷикӣ ворид шудааст (Қарори Ҳукумати Ҷумҳурии Тоҷикистон №98 аз 26.02.2026) ва аз ҷониби мақомоти САҲШ бемамониат сабт мегардад."
                 : "Дар феҳристи асосӣ вуҷуд надорад."}
@@ -168,7 +168,7 @@ export default async function NameDetailPage({
         </div>
 
         {/* Share Section */}
-        <div className="mt-8 border-t border-slate-100 pt-6 dark:border-slate-800/80">
+        <div className="mt-8 border-t border-zinc-800/80 pt-6">
           <ShareButtons
             name={nameItem.name}
             translit={nameItem.translit}
