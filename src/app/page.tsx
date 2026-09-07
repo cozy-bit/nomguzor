@@ -1,21 +1,25 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import rawNames from "@/data/names.json";
 import { NameItem } from "@/types/name";
 import { NameSearch } from "@/components/names/NameSearch";
 import { GenderFilter, FilterGender } from "@/components/names/GenderFilter";
+import { AlphabetFilter } from "@/components/names/AlphabetFilter";
 import { NameList } from "@/components/names/NameList";
 import { Button } from "@/components/ui/Button";
 import { createNameSearchIndex } from "@/lib/search";
-import { Sparkles, Compass, ChevronDown } from "lucide-react";
+import { Sparkles, Compass, ChevronDown, Dices, RotateCcw } from "lucide-react";
 
 const allNames: NameItem[] = rawNames as NameItem[];
-const PAGE_SIZE = 60;
+const PAGE_SIZE = 36;
 
 export default function HomePage() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGender, setSelectedGender] = useState<FilterGender>("all");
+  const [selectedLetter, setSelectedLetter] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const searchIndex = useMemo(() => createNameSearchIndex(allNames), []);
@@ -27,6 +31,18 @@ export default function HomePage() {
 
   const handleGenderChange = (gender: FilterGender) => {
     setSelectedGender(gender);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const handleLetterChange = (letter: string) => {
+    setSelectedLetter(letter);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const handleResetFilters = () => {
+    setSearchQuery("");
+    setSelectedGender("all");
+    setSelectedLetter("");
     setVisibleCount(PAGE_SIZE);
   };
 
@@ -42,8 +58,23 @@ export default function HomePage() {
       result = result.filter((item) => item.gender === selectedGender);
     }
 
+    if (selectedLetter) {
+      result = result.filter(
+        (item) => item.firstLetter.toUpperCase() === selectedLetter.toUpperCase()
+      );
+    }
+
     return result;
-  }, [searchQuery, selectedGender, searchIndex]);
+  }, [searchQuery, selectedGender, selectedLetter, searchIndex]);
+
+  // Set of letters available in the current search + gender filter
+  const availableLetters = useMemo(() => {
+    let pool = allNames;
+    if (selectedGender !== "all") {
+      pool = pool.filter((item) => item.gender === selectedGender);
+    }
+    return new Set(pool.map((item) => item.firstLetter.toUpperCase()));
+  }, [selectedGender]);
 
   const displayedNames = useMemo(() => {
     return filteredNames.slice(0, visibleCount);
@@ -53,6 +84,19 @@ export default function HomePage() {
     setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filteredNames.length));
   };
 
+  const handleRandomName = () => {
+    const pool = filteredNames.length > 0 ? filteredNames : allNames;
+    const randomIndex = Math.floor(Math.random() * pool.length);
+    const chosen = pool[randomIndex];
+    if (chosen) {
+      router.push(`/name/${chosen.slug}`);
+    }
+  };
+
+  const hasActiveFilters = Boolean(
+    searchQuery || selectedGender !== "all" || selectedLetter
+  );
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       {/* Hero Section */}
@@ -60,13 +104,14 @@ export default function HomePage() {
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-emerald-100 backdrop-blur-md mb-4">
             <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
-            <span>Каталоги расмии номҳои тоҷикӣ ({allNames.length} ном)</span>
+            <span>Феҳристи расмии номҳои тоҷикӣ</span>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
             Номи бомаъно ва зебо барои фарзанди шумо
           </h1>
           <p className="mt-4 text-sm text-emerald-100/90 sm:text-base leading-relaxed">
-            Феҳристи расмии миллии номҳои тоҷикӣ бо тасдиқи Ҳукумати Ҷумҳурии Тоҷикистон (Қарори №98 аз 26.02.2026).
+            Ҳазорҳо номи асили тоҷикӣ (феҳристи расмии дорои {allNames.length} ном) бо
+            тафсири маъно, реша ва мутобиқат ба меъёрҳои миллии номгузорӣ.
           </p>
         </div>
 
@@ -77,8 +122,8 @@ export default function HomePage() {
 
       {/* Filter and Search Bar Controls */}
       <section className="mb-8 space-y-4">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="w-full sm:max-w-md">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex-1">
             <NameSearch
               value={searchQuery}
               onChange={handleSearchChange}
@@ -86,34 +131,57 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="flex justify-start sm:justify-end">
+          <div className="flex items-center gap-2">
             <GenderFilter value={selectedGender} onChange={handleGenderChange} />
+
+            {/* Randomizer Button */}
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={handleRandomName}
+              className="gap-2 shrink-0 border border-slate-200/80 bg-white hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 shadow-xs"
+              title="Номи тасодуфӣ"
+            >
+              <Dices className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="hidden sm:inline">Номи тасодуфӣ</span>
+            </Button>
           </div>
         </div>
 
+        {/* Alphabet Filter */}
+        <div className="pt-1">
+          <AlphabetFilter
+            selectedLetter={selectedLetter}
+            onSelectLetter={handleLetterChange}
+            availableLetters={availableLetters}
+          />
+        </div>
+
         {/* Counter Info Bar */}
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-3 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
+        <div className="flex items-center justify-between border-b border-slate-200/80 pb-3 pt-1 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
           <div className="flex items-center gap-1.5">
-            <Compass className="h-3.5 w-3.5 text-emerald-600" />
+            <Compass className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>
               Номҳои ёфтшуда:{" "}
               <strong className="text-slate-800 dark:text-slate-200">
                 {filteredNames.length}
               </strong>
+              {selectedLetter && (
+                <span className="ml-1 text-slate-400">
+                  (ҳарфи «{selectedLetter}»)
+                </span>
+              )}
             </span>
           </div>
 
-          {(searchQuery || selectedGender !== "all") && (
+          {hasActiveFilters && (
             <button
               type="button"
-              onClick={() => {
-                setSearchQuery("");
-                setSelectedGender("all");
-                setVisibleCount(PAGE_SIZE);
-              }}
-              className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+              onClick={handleResetFilters}
+              className="inline-flex items-center gap-1 font-medium text-emerald-600 hover:underline dark:text-emerald-400"
             >
-              Тоза кардани филтрҳо
+              <RotateCcw className="h-3 w-3" />
+              <span>Тоза кардани филтрҳо</span>
             </button>
           )}
         </div>
@@ -121,22 +189,25 @@ export default function HomePage() {
 
       {/* Name Cards Grid */}
       <section>
-        <NameList names={displayedNames} />
+        <NameList
+          names={displayedNames}
+          onResetFilters={hasActiveFilters ? handleResetFilters : undefined}
+        />
 
-        {/* Load More Button */}
+        {/* Load More Button (+36 per click) */}
         {filteredNames.length > visibleCount && (
           <div className="mt-10 flex flex-col items-center justify-center gap-2">
             <Button
               variant="outline"
               size="lg"
               onClick={handleLoadMore}
-              className="gap-2 px-8"
+              className="gap-2 px-8 border-slate-300 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500"
             >
-              <span>Нишон додани боз</span>
+              <span>Боз нишон додан</span>
               <ChevronDown className="h-4 w-4" />
             </Button>
             <p className="text-xs text-slate-400">
-              Намоиши {displayedNames.length} аз {filteredNames.length} ном
+              Намоиши {displayedNames.length} аз {filteredNames.length} ном (+{Math.min(PAGE_SIZE, filteredNames.length - visibleCount)})
             </p>
           </div>
         )}

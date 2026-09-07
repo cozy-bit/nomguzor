@@ -14,6 +14,7 @@ import {
   Globe,
 } from "lucide-react";
 import { FavoriteDetailButton } from "./FavoriteDetailButton";
+import { ShareButtons } from "@/components/names/ShareButtons";
 
 const allNames: NameItem[] = rawNames as NameItem[];
 
@@ -37,11 +38,17 @@ export async function generateMetadata({
     };
   }
 
+  const translitText = nameItem.translit ? ` (${nameItem.translit})` : "";
+
   return {
-    title: `Маъно ва овонавишти номи ${nameItem.name} | Nomguzor`,
-    description:
-      nameItem.meaning ||
-      `Маълумот ва овонавишти номи миллии ${nameItem.name} тибқи феҳристи расмии Ҷумҳурии Тоҷикистон.`,
+    title: `Номи ${nameItem.name}${translitText} — тарзи дурусти навишт | Nomguzor`,
+    description: `Маълумот оид ба номи миллии тоҷикии ${nameItem.name}. Шакли лотинӣ: ${
+      nameItem.translit || nameItem.slug
+    }. Шомили феҳристи расмии Ҷумҳурии Тоҷикистон.`,
+    openGraph: {
+      title: `Номи ${nameItem.name}${translitText} — Nomguzor`,
+      description: `Маълумот ва тарзи навишти номи ${nameItem.name} тибқи феҳристи расмии миллии тоҷикӣ.`,
+    },
   };
 }
 
@@ -79,9 +86,16 @@ export default async function NameDetailPage({
               {nameItem.firstLetter || nameItem.name.charAt(0)}
             </span>
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                {nameItem.name}
-              </h1>
+              <div className="flex items-baseline gap-3">
+                <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                  {nameItem.name}
+                </h1>
+                {nameItem.translit && (
+                  <span className="font-mono text-base font-medium text-slate-400 dark:text-slate-500">
+                    {nameItem.translit}
+                  </span>
+                )}
+              </div>
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 <Badge variant={nameItem.gender === "male" ? "male" : "female"}>
                   {nameItem.gender === "male" ? "Мардона" : "Занона"}
@@ -122,7 +136,7 @@ export default async function NameDetailPage({
                 <Globe className="h-4 w-4 text-sky-500" />
                 <span>Овонавишти лотинӣ</span>
               </div>
-              <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white">
+              <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white font-mono">
                 {nameItem.translit}
               </p>
             </div>
@@ -147,10 +161,19 @@ export default async function NameDetailPage({
             </div>
             <p className="mt-2 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
               {nameItem.inRegistry
-                ? "Ба Феҳристи ягонаи миллии номҳои тоҷикӣ ворид шудааст (Қарори Ҳукумати Ҷумҳурии Тоҷикистон №98 аз 26.02.2026) ва аз ҷониби САҲШ бемамониат сабт мегардад."
+                ? "Ба Феҳристи ягонаи миллии номҳои тоҷикӣ ворид шудааст (Қарори Ҳукумати Ҷумҳурии Тоҷикистон №98 аз 26.02.2026) ва аз ҷониби мақомоти САҲШ бемамониат сабт мегардад."
                 : "Дар феҳристи асосӣ вуҷуд надорад."}
             </p>
           </div>
+        </div>
+
+        {/* Share Section */}
+        <div className="mt-8 border-t border-slate-100 pt-6 dark:border-slate-800/80">
+          <ShareButtons
+            name={nameItem.name}
+            translit={nameItem.translit}
+            slug={nameItem.slug}
+          />
         </div>
       </article>
     </div>

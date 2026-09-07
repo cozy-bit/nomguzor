@@ -2,10 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BookMarked, Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { BookMarked, Heart, Dices } from "lucide-react";
 import { useFavoritesStore } from "@/store/useFavoritesStore";
+import rawNames from "@/data/names.json";
+
+const allNames = rawNames as { slug: string }[];
 
 export function Header() {
+  const router = useRouter();
   const favoriteIds = useFavoritesStore((state) => state.favoriteIds);
   const [mounted, setMounted] = useState(false);
 
@@ -14,6 +19,14 @@ export function Header() {
   }, []);
 
   const count = mounted ? favoriteIds.length : 0;
+
+  const handleRandom = () => {
+    const randomIndex = Math.floor(Math.random() * allNames.length);
+    const chosen = allNames[randomIndex];
+    if (chosen) {
+      router.push(`/name/${chosen.slug}`);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/85 transition-colors">
@@ -45,6 +58,18 @@ export function Header() {
             Каталог
           </Link>
 
+          {/* Randomizer in Header */}
+          <button
+            type="button"
+            onClick={handleRandom}
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200/80 bg-slate-50/80 px-3 py-2 text-sm font-medium text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50 hover:text-emerald-600 dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:border-emerald-800 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400 transition-all active:scale-95"
+            title="Номи тасодуфӣ"
+          >
+            <Dices className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="hidden md:inline">Тасодуфӣ</span>
+          </button>
+
+          {/* Favorites Link */}
           <Link
             href="/favorites"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-200/80 bg-slate-50/80 px-3.5 py-2 text-sm font-medium text-slate-700 hover:border-rose-300 hover:bg-rose-50/50 hover:text-rose-600 dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:border-rose-900 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition-all active:scale-95"

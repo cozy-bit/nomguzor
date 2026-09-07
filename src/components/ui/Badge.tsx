@@ -18,11 +18,11 @@ export function Badge({
     default:
       "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
     male:
-      "bg-sky-50 text-sky-700 border border-sky-200/80 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800/60",
+      "bg-sky-500/10 text-sky-700 border border-sky-500/20 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-500/30",
     female:
-      "bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800/60",
+      "bg-rose-500/10 text-rose-700 border border-rose-500/20 dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-500/30",
     registry:
-      "bg-emerald-50 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/60",
+      "bg-emerald-500/5 text-emerald-700/90 border border-emerald-500/20 dark:bg-emerald-950/30 dark:text-emerald-300/80 dark:border-emerald-800/30",
     outline:
       "border border-slate-200 text-slate-700 dark:border-slate-800 dark:text-slate-300",
   };
