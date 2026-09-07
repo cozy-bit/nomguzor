@@ -80,7 +80,7 @@ export default async function NameDetailPage({
       </div>
 
       {/* Main Detail Card */}
-      <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60 backdrop-blur-md sm:p-10">
+      <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60 sm:p-10">
         {/* Header section with Name and Actions */}
         <div className="flex flex-col justify-between gap-6 border-b border-slate-100 pb-8 dark:border-zinc-800/80 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4">
