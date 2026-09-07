@@ -32,7 +32,7 @@ export function NameCard({ nameItem }: NameCardProps) {
   };
 
   return (
-    <div className="group relative flex flex-col justify-between rounded-2xl border border-zinc-850 bg-zinc-900/60 p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:bg-zinc-900/90 hover:shadow-xl hover:shadow-black/40 cursor-pointer">
+    <div className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md dark:border-zinc-850 dark:bg-zinc-900/60 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/90 dark:hover:shadow-xl dark:hover:shadow-black/40 cursor-pointer">
       {/* Stretched Link to make entire card clickable */}
       <Link
         href={`/name/${nameItem.slug}`}
@@ -44,15 +44,15 @@ export function NameCard({ nameItem }: NameCardProps) {
         {/* Header: First letter badge, Name & Like button */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-800 text-lg font-bold text-zinc-100 border border-zinc-700/50 shadow-inner group-hover:bg-zinc-750 group-hover:text-emerald-400 transition-colors">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold text-slate-800 border border-slate-200/70 shadow-inner group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700/50 dark:group-hover:bg-zinc-750 dark:group-hover:text-emerald-400 transition-colors">
               {nameItem.firstLetter || nameItem.name.charAt(0)}
             </span>
             <div>
-              <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              <h3 className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400 transition-colors">
                 {nameItem.name}
               </h3>
               {nameItem.translit && (
-                <p className="font-mono text-xs text-zinc-400 tracking-wide mt-0.5">
+                <p className="font-mono text-xs text-slate-400 dark:text-zinc-400 tracking-wide mt-0.5">
                   {nameItem.translit}
                 </p>
               )}
@@ -66,8 +66,8 @@ export function NameCard({ nameItem }: NameCardProps) {
             className={cn(
               "pointer-events-auto relative z-20 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-all duration-150 active:scale-90",
               isFavorite
-                ? "bg-rose-950/50 text-rose-400 border border-rose-900/50 shadow-xs"
-                : "text-zinc-500 hover:bg-zinc-800 hover:text-rose-400"
+                ? "bg-rose-50 text-rose-500 border border-rose-200 dark:bg-rose-950/50 dark:text-rose-400 dark:border-rose-900/50 shadow-xs"
+                : "text-slate-400 hover:bg-slate-100 hover:text-rose-500 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-rose-400"
             )}
             aria-label={isFavorite ? t("inFavorites") : t("addToFavorites")}
           >
@@ -96,21 +96,21 @@ export function NameCard({ nameItem }: NameCardProps) {
 
         {/* Meaning if provided */}
         {nameItem.meaning ? (
-          <p className="mt-3 line-clamp-3 text-sm text-zinc-300 leading-relaxed">
+          <p className="mt-3 line-clamp-3 text-sm text-slate-600 dark:text-zinc-300 leading-relaxed">
             {nameItem.meaning}
           </p>
         ) : null}
       </div>
 
       {/* Footer link indication */}
-      <div className="relative z-10 pointer-events-none mt-5 border-t border-zinc-800/80 pt-3 flex items-center justify-between">
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors">
+      <div className="relative z-10 pointer-events-none mt-5 border-t border-slate-100 dark:border-zinc-800/80 pt-3 flex items-center justify-between">
+        <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300 transition-colors">
           <span>{t("details")}</span>
           <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </span>
 
         {nameItem.origin && (
-          <span className="text-[11px] text-zinc-500">
+          <span className="text-[11px] text-slate-400 dark:text-zinc-500">
             {nameItem.origin}
           </span>
         )}

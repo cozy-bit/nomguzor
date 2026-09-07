@@ -32,10 +32,10 @@ export function AlphabetFilter({
           type="button"
           onClick={() => onSelectLetter("")}
           className={cn(
-            "flex h-9 shrink-0 items-center justify-center rounded-xl px-3.5 text-xs font-semibold transition-all duration-150 active:scale-95",
+            "flex h-9 shrink-0 items-center justify-center rounded-xl px-3.5 text-xs font-semibold transition-all duration-150 active:scale-95 shadow-xs",
             !selectedLetter
-              ? "bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/25"
-              : "bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              ? "bg-emerald-600 text-white font-bold shadow-md shadow-emerald-500/25 dark:bg-emerald-500 dark:text-zinc-950"
+              : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
           )}
         >
           {t("all")}
@@ -53,12 +53,12 @@ export function AlphabetFilter({
               disabled={!isAvailable}
               onClick={() => onSelectLetter(letter)}
               className={cn(
-                "flex h-9 min-w-9 shrink-0 items-center justify-center rounded-xl px-2 text-xs font-semibold transition-all duration-150 active:scale-95",
+                "flex h-9 min-w-9 shrink-0 items-center justify-center rounded-xl px-2 text-xs font-semibold transition-all duration-150 active:scale-95 shadow-xs",
                 isSelected
-                  ? "bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/25"
+                  ? "bg-emerald-600 text-white font-bold shadow-md shadow-emerald-500/25 dark:bg-emerald-500 dark:text-zinc-950"
                   : isAvailable
-                  ? "bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 hover:text-white"
-                  : "bg-zinc-950 text-zinc-700 border border-zinc-900/50 cursor-not-allowed"
+                  ? "bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+                  : "bg-slate-100/50 text-slate-300 border border-slate-100/60 dark:bg-zinc-950 dark:text-zinc-700 dark:border-zinc-900/50 cursor-not-allowed"
               )}
               aria-label={`Ҳарфи ${letter}`}
             >

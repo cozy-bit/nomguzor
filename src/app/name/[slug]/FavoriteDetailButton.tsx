@@ -30,7 +30,8 @@ export function FavoriteDetailButton({ nameId }: FavoriteDetailButtonProps) {
       onClick={() => toggleFavorite(nameId)}
       className={cn(
         "gap-2 rounded-xl transition-all shadow-xs",
-        !isFavorite && "border-zinc-750 bg-zinc-850 hover:bg-zinc-800 text-zinc-200"
+        !isFavorite &&
+          "border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-700 dark:border-zinc-750 dark:bg-zinc-850 dark:hover:bg-zinc-800 dark:text-zinc-200"
       )}
     >
       <Heart

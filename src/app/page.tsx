@@ -112,40 +112,40 @@ export default function HomePage() {
       {/* Minimalist Textual Hero Section */}
       <section className="text-center pt-4 pb-8 sm:pt-8 sm:pb-12">
         {/* Subtle pill badge */}
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/40 px-3.5 py-1 text-xs font-medium text-emerald-400 border border-emerald-800/40 mb-4 shadow-xs">
-          <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-1 text-xs font-medium dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/40 mb-4 shadow-xs">
+          <Sparkles className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
           <span>{t("heroBadge")}</span>
         </div>
 
         {/* H1 Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight sm:leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto leading-tight sm:leading-tight">
           {t("heroTitle")}
         </h1>
 
         {/* Subtitle with dynamic name count */}
-        <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto mt-3.5 leading-relaxed">
+        <p className="text-sm md:text-base text-slate-600 dark:text-zinc-400 max-w-xl mx-auto mt-3.5 leading-relaxed">
           {t("heroDesc", { count: allNames.length.toLocaleString() })}
         </p>
       </section>
 
       {/* Monolithic Search and Filter Bar */}
       <section className="mb-6 space-y-4">
-        <div className="flex flex-col md:flex-row items-stretch rounded-2xl border border-zinc-800/90 bg-zinc-900/80 p-1.5 shadow-2xl backdrop-blur-md focus-within:border-zinc-700 transition-all gap-2 md:gap-0">
+        <div className="flex flex-col md:flex-row items-stretch rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm focus-within:border-emerald-500/50 dark:border-zinc-800/90 dark:bg-zinc-900/80 dark:shadow-2xl backdrop-blur-md transition-all gap-2 md:gap-0">
           {/* Search Input */}
           <div className="relative flex-1 flex items-center">
-            <Search className="absolute left-3.5 h-4 w-4 text-zinc-500 pointer-events-none" />
+            <Search className="absolute left-3.5 h-4 w-4 text-slate-400 dark:text-zinc-500 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={t("searchPlaceholder")}
-              className="w-full bg-transparent pl-10 pr-9 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
+              className="w-full bg-transparent pl-10 pr-9 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 dark:text-zinc-100 dark:placeholder:text-zinc-500 focus:outline-none"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => handleSearchChange("")}
-                className="absolute right-2.5 p-1 rounded-full text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+                className="absolute right-2.5 p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:text-zinc-500 dark:hover:text-zinc-300 dark:hover:bg-zinc-800 transition-colors"
                 aria-label="Clear search"
               >
                 <X className="h-3.5 w-3.5" />
@@ -154,19 +154,19 @@ export default function HomePage() {
           </div>
 
           {/* Desktop divider */}
-          <div className="hidden md:block w-px bg-zinc-800 my-1 mx-2" />
+          <div className="hidden md:block w-px bg-slate-200 dark:bg-zinc-800 my-1 mx-2" />
 
           {/* Controls: Gender Filter + Random Button */}
-          <div className="flex items-center justify-between md:justify-end gap-2 pt-1 md:pt-0 border-t md:border-t-0 border-zinc-800/80">
+          <div className="flex items-center justify-between md:justify-end gap-2 pt-1 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-zinc-800/80">
             <GenderFilter value={selectedGender} onChange={handleGenderChange} />
 
             <button
               type="button"
               onClick={handleRandomName}
-              className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-850 px-3 text-xs font-semibold text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all active:scale-95 shadow-xs select-none shrink-0"
+              className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 px-3 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-200 hover:text-slate-900 dark:border-zinc-800 dark:bg-zinc-850 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-white transition-all active:scale-95 shadow-xs select-none shrink-0"
               title={t("random")}
             >
-              <Dices className="h-4 w-4 text-emerald-400" />
+              <Dices className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span className="hidden sm:inline">{t("random")}</span>
             </button>
           </div>
@@ -180,16 +180,16 @@ export default function HomePage() {
         />
 
         {/* Info & Counter Bar */}
-        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3 pt-1 text-xs text-zinc-400">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3 pt-1 text-xs text-slate-500 dark:border-zinc-800/80 dark:text-zinc-400">
           <div className="flex items-center gap-1.5">
-            <Compass className="h-3.5 w-3.5 text-emerald-400" />
+            <Compass className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>
               {t("foundCount")}:{" "}
-              <strong className="text-white">
+              <strong className="text-slate-900 dark:text-white">
                 {filteredNames.length}
               </strong>
               {selectedLetter && (
-                <span className="ml-1 text-zinc-500">
+                <span className="ml-1 text-slate-400 dark:text-zinc-500">
                   ({t("letter")} «{selectedLetter}»)
                 </span>
               )}
@@ -200,7 +200,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-1 font-medium text-emerald-400 hover:underline"
+              className="inline-flex items-center gap-1 font-medium text-emerald-600 hover:underline dark:text-emerald-400"
             >
               <RotateCcw className="h-3 w-3" />
               <span>{t("resetFilters")}</span>
@@ -220,7 +220,7 @@ export default function HomePage() {
         {filteredNames.length > PAGE_SIZE && (
           <div className="mt-12 flex flex-col items-center justify-center gap-3">
             {/* Indicator: Нишон дода шуд: X аз Y */}
-            <div className="flex flex-col items-center gap-1.5 text-xs text-zinc-400">
+            <div className="flex flex-col items-center gap-1.5 text-xs text-slate-600 dark:text-zinc-400">
               <p className="font-medium">
                 {t("shownCount", {
                   current: displayedNames.length,
@@ -228,7 +228,7 @@ export default function HomePage() {
                 })}
               </p>
               {/* Sleek progress bar */}
-              <div className="h-1.5 w-48 overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-1.5 w-48 overflow-hidden rounded-full bg-slate-200 dark:bg-zinc-800">
                 <div
                   className="h-full rounded-full bg-emerald-500 transition-all duration-300"
                   style={{
@@ -249,10 +249,10 @@ export default function HomePage() {
                 variant="outline"
                 size="lg"
                 onClick={handleLoadMore}
-                className="mt-1 gap-2 rounded-2xl border-zinc-750 bg-zinc-900/80 px-8 py-2.5 font-semibold text-zinc-200 hover:border-zinc-600 hover:bg-zinc-850 hover:text-white shadow-xs transition-all active:scale-95"
+                className="mt-1 gap-2 rounded-2xl border-slate-300 bg-white px-8 py-2.5 font-semibold text-slate-800 hover:border-emerald-500 hover:bg-slate-50 hover:text-emerald-700 dark:border-zinc-750 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-850 dark:hover:text-white shadow-xs transition-all active:scale-95"
               >
                 <span>{t("loadMore")}</span>
-                <ChevronDown className="h-4 w-4 text-emerald-400" />
+                <ChevronDown className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               </Button>
             )}
           </div>
