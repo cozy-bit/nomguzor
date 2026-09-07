@@ -17,6 +17,7 @@ export function Header() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -35,10 +36,33 @@ export function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
+  // Close menu on click anywhere outside
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [menuOpen]);
+
   const count = mounted ? favoriteIds.length : 0;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/85 transition-colors">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/85 transition-colors">
       <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo & Brand */}
         <Link
@@ -59,13 +83,14 @@ export function Header() {
           </div>
         </Link>
 
-        {/* Right Action Controls: Theme Toggle & Burger Menu */}
-        <div className="flex items-center gap-2">
+        {/* Right Action Controls: Theme Toggle & Burger Menu (Always above backdrop z-50) */}
+        <div className="relative z-50 flex items-center gap-2">
           {/* Theme Toggle Button (placed to the left of the burger menu) */}
           <ThemeToggle />
 
           {/* Burger Menu Button (placed on the right) */}
           <button
+            ref={buttonRef}
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             className={cn(
@@ -92,20 +117,20 @@ export function Header() {
           </button>
         </div>
 
-        {/* Burger Menu Backdrop */}
+        {/* Burger Menu Backdrop (z-40, behind header controls z-50) */}
         {menuOpen && (
           <div
-            className="fixed inset-0 z-40 bg-slate-950/20 backdrop-blur-[2px] dark:bg-black/40 transition-opacity"
+            className="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-[2px] transition-opacity cursor-pointer"
             onClick={() => setMenuOpen(false)}
             aria-hidden="true"
           />
         )}
 
-        {/* Burger Menu Dropdown Panel */}
+        {/* Burger Menu Dropdown Panel (z-50) */}
         {menuOpen && (
           <div
             ref={menuRef}
-            className="absolute right-4 top-[calc(100%+0.5rem)] z-50 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-all"
+            className="absolute right-4 top-[calc(100%+0.5rem)] z-50 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-all animate-in fade-in zoom-in-95 duration-150"
             role="dialog"
             aria-modal="true"
           >

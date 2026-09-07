@@ -21,7 +21,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     return (
       <div
         className={cn(
-          "h-9 w-9 rounded-xl border border-slate-200 bg-slate-100 dark:border-zinc-800 dark:bg-zinc-900/90",
+          "h-10 w-10 rounded-xl border border-slate-200 bg-slate-100 dark:border-zinc-800 dark:bg-zinc-900/90",
           className
         )}
       />
@@ -35,18 +35,18 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       type="button"
       onClick={toggleTheme}
       className={cn(
-        "flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 active:scale-90 shadow-xs",
-        "border-slate-200 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900",
-        "dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white",
+        "flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-150 active:scale-95 shadow-xs select-none",
+        "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200",
+        "dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-200 dark:hover:bg-zinc-800",
         className
       )}
       title={isDark ? "Светлая тема" : "Тёмная тема"}
       aria-label={isDark ? "Гузариш ба мавзӯи равшан" : "Гузариш ба мавзӯи торик"}
     >
       {isDark ? (
-        <Sun className="h-4 w-4 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+        <Sun className="h-5 w-5 text-amber-400 transition-transform duration-300 hover:rotate-45" />
       ) : (
-        <Moon className="h-4 w-4 text-indigo-500 transition-transform duration-300 -rotate-12 hover:rotate-0" />
+        <Moon className="h-5 w-5 text-indigo-500 transition-transform duration-300 -rotate-12 hover:rotate-0" />
       )}
     </button>
   );
