@@ -72,9 +72,9 @@ export function NameShareCardModal({
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-xs"
+        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 text-sm font-semibold text-white hover:bg-zinc-800 transition-all active:scale-[0.98] shadow-xs select-none"
       >
-        <ImageIcon className="h-3.5 w-3.5 text-emerald-400" />
+        <ImageIcon className="h-4 w-4 text-emerald-400 shrink-0" />
         <span>{t("createImageCard")}</span>
       </button>
 

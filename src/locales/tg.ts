@@ -48,7 +48,7 @@ export const tg = {
   fatherNameLabel: "Номи падар",
   fatherNamePlaceholder: "Масалан: Ҷамшед",
   suffixFormat: "Бо пасванд (-зод / -зода)",
-  izofatFormat: "Изофатӣ ({Ном}и {Падар})",
+  izofatFormat: "Изофатӣ (номи падар)",
   passportFormat: "Шакли навишт дар шиноснома (насаб ва ном)",
   lawNotice: "Мутобиқи моддаи 20 Қонуни ҶТ «Дар бораи бақайдгирии давлатии асноди ҳолати шаҳрвандӣ»",
   copyFullName: "Нусхабардории номи пурра",

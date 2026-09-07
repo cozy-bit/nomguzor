@@ -119,7 +119,7 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
               value={fatherName}
               onChange={(e) => setFatherName(e.target.value)}
               placeholder={t("fatherNamePlaceholder")}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-emerald-500 transition-all"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white dark:focus:bg-zinc-800 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-emerald-500 transition-all"
             />
           </div>
         </div>

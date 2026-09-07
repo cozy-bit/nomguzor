@@ -48,7 +48,7 @@ export const en = {
   fatherNameLabel: "Father's name",
   fatherNamePlaceholder: "E.g.: Jamshed",
   suffixFormat: "Бо пасванд (-зод / -зода)",
-  izofatFormat: "Изофатӣ ({Ном}и {Падар})",
+  izofatFormat: "Izofat (father's name)",
   passportFormat: "Passport format (surname and name)",
   lawNotice: "In accordance with Article 20 of the RT Law 'On State Registration of Civil Status Acts'",
   copyFullName: "Copy full name",

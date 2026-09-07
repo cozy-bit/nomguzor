@@ -48,7 +48,7 @@ export const ru = {
   fatherNameLabel: "Имя отца",
   fatherNamePlaceholder: "Например: Джамшед",
   suffixFormat: "Бо пасванд (-зод / -зода)",
-  izofatFormat: "Изофатӣ ({Ном}и {Падар})",
+  izofatFormat: "Изофетная связь (по отцу)",
   passportFormat: "Формат для паспорта (фамилия и имя)",
   lawNotice: "Мутобиқи моддаи 20 Қонуни ҶТ «Дар бораи бақайдгирии давлатии асноди ҳолати шаҳрвандӣ»",
   copyFullName: "Скопировать полное имя",
