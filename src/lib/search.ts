@@ -3,11 +3,10 @@ import { NameItem } from "@/types/name";
 
 const defaultOptions: IFuseOptions<NameItem> = {
   keys: [
-    { name: "name", weight: 0.6 },
-    { name: "meaning", weight: 0.25 },
-    { name: "origin", weight: 0.15 },
+    { name: "name", weight: 1.0 },
+    { name: "translit", weight: 0.7 },
   ],
-  threshold: 0.35,
+  threshold: 0.3,
   ignoreLocation: true,
   minMatchCharLength: 1,
 };

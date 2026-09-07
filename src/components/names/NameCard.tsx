@@ -45,11 +45,15 @@ export function NameCard({ nameItem }: NameCardProps) {
               >
                 {nameItem.name}
               </Link>
-              {nameItem.origin && (
+              {nameItem.translit ? (
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  {nameItem.origin || "Тоҷикӣ"} • {nameItem.translit}
+                </p>
+              ) : nameItem.origin ? (
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   {nameItem.origin}
                 </p>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -87,10 +91,17 @@ export function NameCard({ nameItem }: NameCardProps) {
           )}
         </div>
 
-        {/* Meaning */}
-        <p className="mt-3 line-clamp-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          {nameItem.meaning}
-        </p>
+        {/* Meaning or official registry note */}
+        {nameItem.meaning ? (
+          <p className="mt-3 line-clamp-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            {nameItem.meaning}
+          </p>
+        ) : (
+          <div className="mt-3 flex items-center gap-1.5 rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2 text-xs text-emerald-800/90 dark:border-emerald-950/60 dark:bg-emerald-950/30 dark:text-emerald-300/90">
+            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+            <span className="line-clamp-1">Номи шомили феҳристи расмии Ҷумҳурии Тоҷикистон</span>
+          </div>
+        )}
       </div>
 
       {/* Footer Link */}

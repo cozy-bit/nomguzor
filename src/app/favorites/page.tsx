@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import rawNames from "@/data/names.placeholder.json";
+import rawNames from "@/data/names.json";
 import { NameItem } from "@/types/name";
 import { useFavoritesStore } from "@/store/useFavoritesStore";
 import { NameList } from "@/components/names/NameList";

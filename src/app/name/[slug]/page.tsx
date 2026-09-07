@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import rawNames from "@/data/names.placeholder.json";
+import rawNames from "@/data/names.json";
 import { NameItem } from "@/types/name";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -11,6 +11,7 @@ import {
   BookOpen,
   Info,
   ShieldCheck,
+  Globe,
 } from "lucide-react";
 import { FavoriteDetailButton } from "./FavoriteDetailButton";
 
@@ -37,8 +38,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `Маънои номи ${nameItem.name} | Nomguzor`,
-    description: nameItem.meaning,
+    title: `Маъно ва овонавишти номи ${nameItem.name} | Nomguzor`,
+    description:
+      nameItem.meaning ||
+      `Маълумот ва овонавишти номи миллии ${nameItem.name} тибқи феҳристи расмии Ҷумҳурии Тоҷикистон.`,
   };
 }
 
@@ -104,33 +107,47 @@ export default async function NameDetailPage({
           <div className="rounded-2xl bg-slate-50/80 p-5 dark:bg-slate-800/50 sm:col-span-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
               <BookOpen className="h-4 w-4" />
-              <span>Маъно ва тафсири ном</span>
+              <span>Маъно ва мақоми ном</span>
             </div>
             <p className="mt-2 text-base leading-relaxed text-slate-700 dark:text-slate-200">
-              {nameItem.meaning}
+              {nameItem.meaning ||
+                "Номи шомили феҳристи расмии миллии Ҷумҳурии Тоҷикистон буда, истифодаи он дар санадҳои расмӣ ва САҲШ тавсия шудааст."}
             </p>
           </div>
+
+          {/* Translit / Latin spelling */}
+          {nameItem.translit && (
+            <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800">
+              <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <Globe className="h-4 w-4 text-sky-500" />
+                <span>Овонавишти лотинӣ</span>
+              </div>
+              <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white">
+                {nameItem.translit}
+              </p>
+            </div>
+          )}
 
           {/* Origin Section */}
           <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              <Info className="h-4 w-4" />
+              <Info className="h-4 w-4 text-emerald-500" />
               <span>Реша ва пайдоиш</span>
             </div>
             <p className="mt-2 text-base font-semibold text-slate-900 dark:text-white">
-              {nameItem.origin || "Форсӣ-тоҷикӣ"}
+              {nameItem.origin || "Тоҷикӣ"}
             </p>
           </div>
 
           {/* Registry Status Section */}
-          <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800">
+          <div className="rounded-2xl border border-slate-100 p-5 dark:border-slate-800 sm:col-span-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               <ShieldCheck className="h-4 w-4 text-emerald-500" />
-              <span>Мақоми ҳуқуқӣ</span>
+              <span>Мақоми ҳуқуқӣ ва реестри давлатӣ</span>
             </div>
-            <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            <p className="mt-2 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
               {nameItem.inRegistry
-                ? "Ба Феҳристи ягонаи миллии номҳои тоҷикӣ ворид шудааст ва аз ҷониби САҲШ тавсия мешавад."
+                ? "Ба Феҳристи ягонаи миллии номҳои тоҷикӣ ворид шудааст (Қарори Ҳукумати Ҷумҳурии Тоҷикистон №98 аз 26.02.2026) ва аз ҷониби САҲШ бемамониат сабт мегардад."
                 : "Дар феҳристи асосӣ вуҷуд надорад."}
             </p>
           </div>

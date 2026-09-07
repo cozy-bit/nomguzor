@@ -9,4 +9,5 @@ export interface NameItem {
   origin?: string;
   inRegistry: boolean;
   firstLetter: string;
+  translit?: string;
 }
