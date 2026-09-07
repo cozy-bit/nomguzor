@@ -6,6 +6,7 @@ import rawNames from "@/data/names.json";
 import { NameItem } from "@/types/name";
 import { GenderFilter, FilterGender } from "@/components/names/GenderFilter";
 import { AlphabetFilter } from "@/components/names/AlphabetFilter";
+import { PopularNames } from "@/components/names/PopularNames";
 import { NameList } from "@/components/names/NameList";
 import { Button } from "@/components/ui/Button";
 import { createNameSearchIndex } from "@/lib/search";
@@ -164,6 +165,9 @@ export default function HomePage() {
             </button>
           </div>
         </div>
+
+        {/* Popular Trending Names Chips */}
+        <PopularNames onSelectName={handleSearchChange} />
 
         {/* Alphabet Filter */}
         <AlphabetFilter

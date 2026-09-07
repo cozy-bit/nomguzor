@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+export const viewport: Viewport = {
+  themeColor: "#090D16",
+};
 
 export const metadata: Metadata = {
   title: "Nomguzor — Каталог таджикских имён | Феҳристи номҳои тоҷикӣ",
@@ -16,6 +20,11 @@ export const metadata: Metadata = {
     "Nomguzor",
   ],
   authors: [{ name: "Nomguzor Team" }],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Nomguzor",
+  },
   openGraph: {
     title: "Nomguzor — Каталог таджикских имён",
     description:

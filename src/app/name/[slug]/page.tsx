@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { FavoriteDetailButton } from "./FavoriteDetailButton";
 import { ShareButtons } from "@/components/names/ShareButtons";
+import { PatronymicPreview } from "@/components/names/PatronymicPreview";
+import { NameShareCardModal } from "@/components/names/NameShareCardModal";
 
 const allNames: NameItem[] = rawNames as NameItem[];
 
@@ -110,7 +112,14 @@ export default async function NameDetailPage({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <NameShareCardModal
+              name={nameItem.name}
+              translit={nameItem.translit}
+              gender={nameItem.gender}
+              meaning={nameItem.meaning}
+              slug={nameItem.slug}
+            />
             <FavoriteDetailButton nameId={nameItem.id} />
           </div>
         </div>
@@ -165,6 +174,11 @@ export default async function NameDetailPage({
                 : "Дар феҳристи асосӣ вуҷуд надорад."}
             </p>
           </div>
+        </div>
+
+        {/* Patronymic & Surname Compatibility Matcher */}
+        <div className="mt-8">
+          <PatronymicPreview name={nameItem.name} gender={nameItem.gender} />
         </div>
 
         {/* Share Section */}

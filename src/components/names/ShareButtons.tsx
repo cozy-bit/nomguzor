@@ -56,7 +56,7 @@ export function ShareButtons({ name, translit, slug }: ShareButtonsProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2 pt-2">
-      <span className="text-xs font-medium text-zinc-400 mr-1">
+      <span className="text-xs font-medium text-slate-500 dark:text-zinc-400 mr-1">
         {t("share")}:
       </span>
 
@@ -65,7 +65,7 @@ export function ShareButtons({ name, translit, slug }: ShareButtonsProps) {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-900/60 bg-emerald-950/30 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/50 transition-all active:scale-95"
+        className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-xs"
       >
         <MessageCircle className="h-3.5 w-3.5 text-emerald-400" />
         <span>WhatsApp</span>
@@ -76,7 +76,7 @@ export function ShareButtons({ name, translit, slug }: ShareButtonsProps) {
         href={telegramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-xl border border-sky-900/60 bg-sky-950/30 px-3 py-1.5 text-xs font-semibold text-sky-300 hover:bg-sky-900/50 transition-all active:scale-95"
+        className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-xs"
       >
         <Send className="h-3.5 w-3.5 text-sky-400" />
         <span>Telegram</span>
@@ -87,7 +87,7 @@ export function ShareButtons({ name, translit, slug }: ShareButtonsProps) {
         variant="outline"
         size="sm"
         onClick={handleCopyLink}
-        className="text-xs gap-1.5 relative border-zinc-800 bg-zinc-900 hover:bg-zinc-850 text-zinc-200"
+        className="text-xs gap-1.5 relative border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-white"
       >
         {copied ? (
           <>
@@ -98,7 +98,7 @@ export function ShareButtons({ name, translit, slug }: ShareButtonsProps) {
           </>
         ) : (
           <>
-            <Copy className="h-3.5 w-3.5 text-zinc-400" />
+            <Copy className="h-3.5 w-3.5 text-zinc-300" />
             <span>{t("copyLink")}</span>
           </>
         )}
