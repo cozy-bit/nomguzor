@@ -36,8 +36,8 @@ export function GenderFilter({ value, onChange }: GenderFilterProps) {
             className={cn(
               "relative flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-150 select-none",
               isActive
-                ? "bg-white text-slate-900 shadow-xs dark:bg-zinc-800 dark:text-white"
-                : "text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+                ? "bg-white text-slate-950 font-bold shadow-xs dark:bg-zinc-800 dark:text-white"
+                : "text-slate-700 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-200"
             )}
           >
             <Icon

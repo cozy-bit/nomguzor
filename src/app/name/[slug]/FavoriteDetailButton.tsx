@@ -29,18 +29,25 @@ export function FavoriteDetailButton({ nameId }: FavoriteDetailButtonProps) {
       size="md"
       onClick={() => toggleFavorite(nameId)}
       className={cn(
-        "gap-2 rounded-xl transition-all shadow-xs",
+        "gap-2 rounded-xl transition-all shadow-xs font-semibold",
         !isFavorite &&
-          "border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-700 dark:border-zinc-750 dark:bg-zinc-850 dark:hover:bg-zinc-800 dark:text-zinc-200"
+          "border border-slate-300 bg-white hover:bg-slate-100 text-slate-900 hover:text-black dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100"
       )}
     >
       <Heart
         className={cn(
-          "h-4 w-4 transition-transform",
-          isFavorite ? "fill-white" : "text-rose-500"
+          "h-4 w-4 transition-transform shrink-0",
+          isFavorite ? "fill-white text-white" : "text-rose-500 fill-rose-500/10"
         )}
       />
-      <span>{isFavorite ? t("inFavorites") : t("addToFavorites")}</span>
+      <span
+        className={cn(
+          "font-semibold",
+          isFavorite ? "text-white" : "text-slate-900 dark:text-zinc-100"
+        )}
+      >
+        {isFavorite ? t("inFavorites") : t("addToFavorites")}
+      </span>
     </Button>
   );
 }

@@ -127,7 +127,7 @@ export default async function NameDetailPage({
         {/* Info Grid */}
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {/* Meaning Section */}
-          <div className="rounded-2xl bg-slate-50 p-5 border border-slate-100 dark:bg-zinc-850/60 dark:border-zinc-800/80 sm:col-span-2">
+          <div className="rounded-2xl bg-slate-50 p-5 border border-slate-100 dark:bg-zinc-900/80 dark:border-zinc-800/80 sm:col-span-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
               <BookOpen className="h-4 w-4" />
               <span>Маъно ва мақоми ном</span>
@@ -140,7 +140,7 @@ export default async function NameDetailPage({
 
           {/* Translit / Latin spelling */}
           {nameItem.translit && (
-            <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-850/40">
+            <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60">
               <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
                 <Globe className="h-4 w-4 text-sky-500 dark:text-sky-400" />
                 <span>Овонавишти лотинӣ</span>
@@ -152,7 +152,7 @@ export default async function NameDetailPage({
           )}
 
           {/* Origin Section */}
-          <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-850/40">
+          <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
               <Info className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span>Реша ва пайдоиш</span>
@@ -163,7 +163,7 @@ export default async function NameDetailPage({
           </div>
 
           {/* Registry Status Section */}
-          <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-850/40 sm:col-span-2">
+          <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 sm:col-span-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
               <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span>Мақоми ҳуқуқӣ ва реестри давлатӣ</span>

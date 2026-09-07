@@ -32,7 +32,7 @@ export function NameCard({ nameItem }: NameCardProps) {
   };
 
   return (
-    <div className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md dark:border-zinc-850 dark:bg-zinc-900/60 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/90 dark:hover:shadow-xl dark:hover:shadow-black/40 cursor-pointer">
+    <div className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/90 dark:hover:shadow-xl dark:hover:shadow-black/40 cursor-pointer">
       {/* Stretched Link to make entire card clickable */}
       <Link
         href={`/name/${nameItem.slug}`}
@@ -44,7 +44,7 @@ export function NameCard({ nameItem }: NameCardProps) {
         {/* Header: First letter badge, Name & Like button */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold text-slate-800 border border-slate-200/70 shadow-inner group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700/50 dark:group-hover:bg-zinc-750 dark:group-hover:text-emerald-400 transition-colors">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold text-slate-800 border border-slate-200/70 shadow-inner group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700/50 dark:group-hover:bg-zinc-700 dark:group-hover:text-emerald-400 transition-colors">
               {nameItem.firstLetter || nameItem.name.charAt(0)}
             </span>
             <div>

@@ -85,7 +85,7 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-xs dark:border-zinc-800 dark:bg-zinc-850/60 transition-all">
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-xs dark:border-zinc-800 dark:bg-zinc-900 transition-all">
       {/* Block Header */}
       <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3 sm:pb-4 dark:border-zinc-800/80">
         <div className="flex items-center gap-2.5">
@@ -154,7 +154,7 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
         </div>
 
         {/* Live Preview Box */}
-        <div className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 via-teal-500/5 to-transparent p-4 sm:p-5 dark:border-emerald-500/20 dark:from-emerald-950/20 dark:to-transparent">
+        <div className="relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-emerald-50/60 p-4 sm:p-5 dark:border-emerald-500/20 dark:bg-zinc-950/60">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div className="w-full sm:flex-1 min-w-0">
               <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
@@ -188,14 +188,14 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
           </div>
 
           {/* Legal Citation Notice */}
-          <div className="mt-3.5 pt-3 border-t border-emerald-500/10 dark:border-zinc-800/80 flex items-start gap-1.5 text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400">
+          <div className="mt-3.5 pt-3 border-t border-emerald-500/15 dark:border-zinc-800/80 flex items-start gap-1.5 text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400">
             <Scale className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
             <span className="leading-snug">{t("lawNotice")}</span>
           </div>
         </div>
 
         {/* Passport Form Variant */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:border-zinc-800 dark:bg-zinc-900/50">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 rounded-xl border border-slate-200/80 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-950/60">
           <div className="min-w-0 flex-1">
             <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 dark:text-zinc-500">
               {t("passportFormat")}
@@ -208,7 +208,7 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
           <button
             type="button"
             onClick={() => handleCopy(currentResult.passport, "passport")}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-750 transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition-colors shrink-0"
           >
             {copiedKey === "passport" ? (
               <>

@@ -126,7 +126,7 @@ export function Header() {
                       className={cn(
                         "flex flex-col items-center justify-center py-2 px-1 rounded-lg text-xs font-bold transition-all duration-150 select-none",
                         isActive
-                          ? "bg-white text-emerald-600 shadow-xs dark:bg-zinc-850 dark:text-emerald-400"
+                          ? "bg-white text-emerald-600 shadow-xs dark:bg-zinc-800 dark:text-emerald-400"
                           : "text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white"
                       )}
                       title={localeLabels[loc].full}
@@ -148,7 +148,7 @@ export function Header() {
             <Link
               href="/favorites"
               onClick={() => setMenuOpen(false)}
-              className="group flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-700 hover:border-rose-300 hover:bg-rose-50/70 hover:text-rose-600 dark:border-zinc-800 dark:bg-zinc-850/70 dark:text-zinc-200 dark:hover:border-rose-900/60 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition-all active:scale-98 shadow-xs"
+              className="group flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-700 hover:border-rose-300 hover:bg-rose-50/70 hover:text-rose-600 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:border-rose-900/60 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition-all active:scale-98 shadow-xs"
             >
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-100 text-rose-500 group-hover:bg-rose-200 dark:bg-rose-950/60 dark:text-rose-400 dark:group-hover:bg-rose-900/50 transition-colors">

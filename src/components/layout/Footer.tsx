@@ -41,7 +41,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-center justify-between gap-2 border-t border-zinc-850 pt-6 text-xs text-zinc-500 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-2 border-t border-zinc-800 pt-6 text-xs text-zinc-500 sm:flex-row">
           <p>© {currentYear} Nomguzor. {t("copyright")}</p>
           <p className="flex items-center gap-1">
             {t("withLove")} <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />
