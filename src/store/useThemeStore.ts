@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { useEffect } from "react";
+import { getClientCookie, setClientCookie } from "@/lib/cookies";
 
 export type Theme = "light" | "dark";
 
@@ -12,12 +13,26 @@ interface ThemeState {
   toggleTheme: () => void;
 }
 
+function getInitialTheme(): Theme {
+  if (typeof document !== "undefined") {
+    const cookieTheme = getClientCookie("nomguzor-theme");
+    if (cookieTheme === "light" || cookieTheme === "dark") {
+      return cookieTheme;
+    }
+    if (document.documentElement.classList.contains("dark")) {
+      return "dark";
+    }
+  }
+  return "dark";
+}
+
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
-      theme: "dark",
+      theme: getInitialTheme(),
       setTheme: (theme: Theme) => {
         set({ theme });
+        setClientCookie("nomguzor-theme", theme, 365);
         if (typeof document !== "undefined") {
           if (theme === "dark") {
             document.documentElement.classList.add("dark");
@@ -36,6 +51,10 @@ export const useThemeStore = create<ThemeState>()(
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         if (state && typeof document !== "undefined") {
+          const currentCookie = getClientCookie("nomguzor-theme");
+          if (!currentCookie) {
+            setClientCookie("nomguzor-theme", state.theme, 365);
+          }
           if (state.theme === "dark") {
             document.documentElement.classList.add("dark");
           } else {

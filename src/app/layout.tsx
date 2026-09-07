@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Locale } from "@/locales";
 
 export const viewport: Viewport = {
   themeColor: "#090D16",
@@ -33,20 +35,39 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("nomguzor-theme")?.value;
+  const localeCookie = cookieStore.get("nomguzor-locale")?.value as Locale | undefined;
+
+  const theme = themeCookie === "light" ? "light" : "dark";
+  const locale: Locale =
+    localeCookie && ["tg", "ru", "en"].includes(localeCookie) ? localeCookie : "tg";
+
   return (
-    <html lang="tg" className="h-full scroll-smooth dark" suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={theme === "light" ? "h-full scroll-smooth" : "h-full scroll-smooth dark"}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var stored = localStorage.getItem('nomguzor-theme');
-                var theme = stored ? JSON.parse(stored).state?.theme : 'dark';
+                function getCookie(name) {
+                  var match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\\]\\\\/+^])/g, '\\\\$1') + '=([^;]*)'));
+                  return match ? decodeURIComponent(match[1]) : null;
+                }
+                var theme = getCookie('nomguzor-theme');
+                if (!theme) {
+                  var stored = localStorage.getItem('nomguzor-theme');
+                  theme = stored ? JSON.parse(stored).state?.theme : 'dark';
+                }
                 if (theme === 'light') {
                   document.documentElement.classList.remove('dark');
                 } else {
