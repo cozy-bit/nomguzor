@@ -17,6 +17,7 @@ import { FavoriteDetailButton } from "./FavoriteDetailButton";
 import { ShareButtons } from "@/components/names/ShareButtons";
 import { PatronymicPreview } from "@/components/names/PatronymicPreview";
 import { NameShareCardModal } from "@/components/names/NameShareCardModal";
+import { RandomNameButton } from "@/components/names/RandomNameButton";
 
 const allNames: NameItem[] = rawNames as NameItem[];
 
@@ -113,6 +114,7 @@ export default async function NameDetailPage({
           </div>
 
           <div className="flex items-center gap-2.5 flex-wrap">
+            <RandomNameButton currentSlug={nameItem.slug} />
             <NameShareCardModal
               name={nameItem.name}
               translit={nameItem.translit}
