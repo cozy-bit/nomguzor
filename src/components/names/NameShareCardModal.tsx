@@ -107,15 +107,16 @@ export function NameShareCardModal({
             </div>
 
             {/* Canvas / Card to export */}
-            <div className="overflow-hidden rounded-2xl shadow-2xl p-1 bg-gradient-to-b from-emerald-500/20 to-transparent">
+            <div className="overflow-hidden rounded-2xl shadow-2xl p-1 bg-gradient-to-b from-emerald-500/20 to-transparent max-w-full">
               <div
                 ref={cardRef}
                 style={{
                   backgroundColor: "#090D16",
-                  width: "320px",
+                  width: "100%",
+                  maxWidth: "320px",
                   minHeight: "440px",
                 }}
-                className="flex flex-col justify-between p-6 rounded-2xl border border-emerald-500/30 text-white select-none relative overflow-hidden"
+                className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl border border-emerald-500/30 text-white select-none relative overflow-hidden mx-auto"
               >
                 {/* Background decorative glows */}
                 <div

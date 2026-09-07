@@ -88,12 +88,12 @@ export default async function NameDetailPage({
               {nameItem.firstLetter || nameItem.name.charAt(0)}
             </span>
             <div>
-              <div className="flex items-baseline gap-3">
-                <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+              <div className="flex flex-wrap items-baseline gap-2 sm:gap-3">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white break-words">
                   {nameItem.name}
                 </h1>
                 {nameItem.translit && (
-                  <span className="font-mono text-base font-medium text-slate-400 dark:text-zinc-400">
+                  <span className="font-mono text-sm sm:text-base font-medium text-slate-400 dark:text-zinc-400">
                     {nameItem.translit}
                   </span>
                 )}
