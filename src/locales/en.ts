@@ -39,4 +39,7 @@ export const en = {
   withLove: "Crafted with passion for Tajik culture",
   inFavorites: "Saved in favorites",
   addToFavorites: "Save to favorites",
+  language: "Language",
+  menu: "Menu",
+  close: "Close",
 };

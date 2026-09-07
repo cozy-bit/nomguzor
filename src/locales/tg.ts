@@ -39,4 +39,7 @@ export const tg = {
   withLove: "Бо муҳаббат ба фарҳанги тоҷикӣ",
   inFavorites: "Дар дӯстдошта ҳаст",
   addToFavorites: "Ба дӯстдошта",
+  language: "Забон",
+  menu: "Меню",
+  close: "Пӯшидан",
 };

@@ -39,4 +39,7 @@ export const ru = {
   withLove: "С уважением к таджикской культуре",
   inFavorites: "В избранном",
   addToFavorites: "В избранное",
+  language: "Язык",
+  menu: "Меню",
+  close: "Закрыть",
 };

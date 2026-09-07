@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/Button";
 import { createNameSearchIndex } from "@/lib/search";
 import { useTranslation } from "@/store/useLocaleStore";
 import {
-  Sparkles,
   Compass,
   ChevronDown,
   Dices,
@@ -111,12 +110,6 @@ export default function HomePage() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       {/* Minimalist Textual Hero Section */}
       <section className="text-center pt-4 pb-8 sm:pt-8 sm:pb-12">
-        {/* Subtle pill badge */}
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-1 text-xs font-medium dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/40 mb-4 shadow-xs">
-          <Sparkles className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>{t("heroBadge")}</span>
-        </div>
-
         {/* H1 Heading */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white max-w-3xl mx-auto leading-tight sm:leading-tight">
           {t("heroTitle")}
