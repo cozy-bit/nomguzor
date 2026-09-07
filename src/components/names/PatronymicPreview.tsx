@@ -5,12 +5,16 @@ import { Users, Copy, Check, Scale } from "lucide-react";
 import { useTranslation } from "@/store/useLocaleStore";
 import { cn } from "@/lib/utils";
 
+import {
+  formatTajikFullName,
+  formatTajikPassportName,
+  type OfficialFormatStyle,
+} from "@/lib/patronymic";
+
 interface PatronymicPreviewProps {
   name: string;
   gender: "male" | "female";
 }
-
-type OfficialFormatStyle = "suffix" | "izofat";
 
 export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
   const { t } = useTranslation();
@@ -19,51 +23,24 @@ export function PatronymicPreview({ name, gender }: PatronymicPreviewProps) {
     useState<OfficialFormatStyle>("suffix");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  // Helper for izofat connector:
-  // If ends with vowel: "а, о, ӯ, е, и" -> attached with "-и" or "-йи" (e.g. Анора -> Анораи, Сино -> Синои, Саъдӣ -> Саъдийи)
-  const izofatName = useMemo(() => {
-    const trimmed = name.trim();
-    if (!trimmed) return "";
-    const lastChar = trimmed.slice(-1).toLowerCase();
-
-    if (lastChar === "ӣ") {
-      return `${trimmed.slice(0, -1)}йи`;
-    }
-    if (lastChar === "и") {
-      return `${trimmed}йи`;
-    }
-    return `${trimmed}и`;
-  }, [name]);
-
   const activeFatherName = fatherName.trim() || "Ҷамшед";
 
-  // Compute strictly the 2 RT legal national formats
-  const formats = useMemo(() => {
-    const fn = activeFatherName;
-    const isMale = gender === "male";
-
-    // 1. Бо пасванд (-зод барои мардона / -зода барои занона)
-    const suffix = isMale ? "зод" : "зода";
-    const suffixPrimary = `${izofatName} ${fn}${suffix}`;
-    const suffixPassport = `${fn}${suffix} ${name}`;
-
-    // 2. Изофатӣ ({Исм}и {НомиПадар})
-    const izofatPrimary = `${izofatName} ${fn}`;
-    const izofatPassport = `${fn} ${name}`;
-
+  const currentResult = useMemo(() => {
     return {
-      suffix: {
-        primary: suffixPrimary,
-        passport: suffixPassport,
-      },
-      izofat: {
-        primary: izofatPrimary,
-        passport: izofatPassport,
-      },
+      primary: formatTajikFullName(
+        name,
+        activeFatherName,
+        gender,
+        selectedFormat
+      ),
+      passport: formatTajikPassportName(
+        name,
+        activeFatherName,
+        gender,
+        selectedFormat
+      ),
     };
-  }, [activeFatherName, izofatName, gender, name]);
-
-  const currentResult = formats[selectedFormat];
+  }, [name, activeFatherName, gender, selectedFormat]);
 
   const handleCopy = async (text: string, key: string) => {
     try {
