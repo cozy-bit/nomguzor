@@ -83,18 +83,56 @@ export function Header() {
           </div>
         </Link>
 
-        {/* Right Action Controls: Theme Toggle & Burger Menu (Always above backdrop z-50) */}
-        <div className="relative z-50 flex items-center gap-2">
-          {/* Theme Toggle Button (placed to the left of the burger menu) */}
+        {/* Right Action Controls */}
+        <div className="relative z-50 flex items-center gap-2 sm:gap-2.5">
+          {/* Desktop Language Switcher (hidden on mobile, shown on md+) */}
+          <div className="hidden md:flex items-center rounded-xl border border-slate-200 bg-slate-100 p-1 shadow-inner dark:border-zinc-800 dark:bg-zinc-900/90">
+            {locales.map((loc) => {
+              const isActive = locale === loc;
+              return (
+                <button
+                  key={loc}
+                  type="button"
+                  onClick={() => setLocale(loc)}
+                  className={cn(
+                    "flex h-8 items-center justify-center rounded-lg px-2.5 text-xs font-bold transition-all duration-150 select-none",
+                    isActive
+                      ? "bg-white text-emerald-600 shadow-xs dark:bg-zinc-800 dark:text-emerald-400"
+                      : "text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white"
+                  )}
+                  title={localeLabels[loc].full}
+                  aria-label={localeLabels[loc].full}
+                >
+                  {localeLabels[loc].label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop Favorites Button (hidden on mobile, shown on md+) */}
+          <Link
+            href="/favorites"
+            className="hidden md:inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-3.5 text-sm font-semibold text-slate-700 hover:border-rose-300 hover:bg-rose-50/70 hover:text-rose-600 dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-200 dark:hover:border-rose-900/60 dark:hover:bg-rose-950/30 dark:hover:text-rose-400 transition-all active:scale-95 shadow-xs select-none"
+          >
+            <Heart className="h-4 w-4 text-rose-500 fill-rose-500/30" />
+            <span>{t("favorites")}</span>
+            {count > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-rose-500 px-1.5 text-xs font-bold text-white shadow-xs">
+                {count}
+              </span>
+            )}
+          </Link>
+
+          {/* Theme Toggle Button (always visible on both desktop and mobile) */}
           <ThemeToggle />
 
-          {/* Burger Menu Button (placed on the right) */}
+          {/* Mobile Burger Menu Button (visible on mobile only, hidden on md+) */}
           <button
             ref={buttonRef}
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             className={cn(
-              "relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-150 active:scale-95 shadow-xs select-none",
+              "md:hidden relative flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-150 active:scale-95 shadow-xs select-none",
               menuOpen
                 ? "border-emerald-500/50 bg-emerald-50/80 text-emerald-700 dark:border-emerald-600/50 dark:bg-emerald-950/40 dark:text-emerald-400"
                 : "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-200 dark:hover:bg-zinc-800"
@@ -117,20 +155,20 @@ export function Header() {
           </button>
         </div>
 
-        {/* Burger Menu Backdrop (z-40, behind header controls z-50) */}
+        {/* Mobile Burger Menu Backdrop (hidden on md+) */}
         {menuOpen && (
           <div
-            className="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-[2px] transition-opacity cursor-pointer"
+            className="md:hidden fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-[2px] transition-opacity cursor-pointer"
             onClick={() => setMenuOpen(false)}
             aria-hidden="true"
           />
         )}
 
-        {/* Burger Menu Dropdown Panel (z-50) */}
+        {/* Mobile Burger Menu Dropdown Panel (hidden on md+) */}
         {menuOpen && (
           <div
             ref={menuRef}
-            className="absolute right-4 top-[calc(100%+0.5rem)] z-50 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-all animate-in fade-in zoom-in-95 duration-150"
+            className="md:hidden absolute right-4 top-[calc(100%+0.5rem)] z-50 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-all animate-in fade-in zoom-in-95 duration-150"
             role="dialog"
             aria-modal="true"
           >
