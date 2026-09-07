@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "slug": "rustam",
+    "name": "Рустам",
+    "gender": "male",
+    "meaning": "Боҳодур, паҳлавон, нерӯманд, бузургтан; қаҳрамони асосии «Шоҳнома»-и Фирдавсӣ",
+    "origin": "Форсӣ-тоҷикӣ",
+    "inRegistry": true,
+    "firstLetter": "Р"
+  },
+  {
+    "id": "2",
+    "slug": "siyovush",
+    "name": "Сиёвуш",
+    "gender": "male",
+    "meaning": "Дорандаи аспи сиёҳ; рамзи покиву бегуноҳӣ, қаҳрамони миллии «Шоҳнома»",
+    "origin": "Форсӣ-тоҷикӣ",
+    "inRegistry": true,
+    "firstLetter": "С"
+  },
+  {
+    "id": "3",
+    "slug": "anora",
+    "name": "Анора",
+    "gender": "female",
+    "meaning": "Монанди анор, соҳиби лабону рухсораи чун донаи анор сурху тозаву зебо",
+    "origin": "Форсӣ-тоҷикӣ",
+    "inRegistry": true,
+    "firstLetter": "А"
+  },
+  {
+    "id": "4",
+    "slug": "nigina",
+    "name": "Нигина",
+    "gender": "female",
+    "meaning": "Гавҳар, ёқут, нигини ангуштарӣ, зевар; маҷозан азизу гиромӣ ва ягона",
+    "origin": "Форсӣ-тоҷикӣ",
+    "inRegistry": true,
+    "firstLetter": "Н"
+  }
+]
