@@ -57,4 +57,9 @@ export const en = {
   generating: "Generating...",
   cardExportTitle: "Name Card Export",
   cardExportSubtitle: "Ready to share on Instagram Stories & WhatsApp",
+  cardRatio: "Image Format",
+  ratioStory: "Story (9:16)",
+  ratioSquare: "Square (1:1)",
+  ratioClassic: "Classic (4:3)",
+  ratioLandscape: "Landscape (16:9)",
 };

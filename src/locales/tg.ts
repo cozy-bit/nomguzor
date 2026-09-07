@@ -57,4 +57,9 @@ export const tg = {
   generating: "Омодасозӣ...",
   cardExportTitle: "Корти тасвирии ном",
   cardExportSubtitle: "Барои интишор дар Instagram Stories ва WhatsApp",
+  cardRatio: "Формати тасвир",
+  ratioStory: "Ҳикоя (Story)",
+  ratioSquare: "Квадрат (Пост)",
+  ratioClassic: "Классик (4:3)",
+  ratioLandscape: "Уфуқӣ (16:9)",
 };

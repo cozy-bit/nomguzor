@@ -57,4 +57,9 @@ export const ru = {
   generating: "Генерация...",
   cardExportTitle: "Карточка имени",
   cardExportSubtitle: "Для публикации в Instagram Stories и WhatsApp",
+  cardRatio: "Формат изображения",
+  ratioStory: "Сториз (Story)",
+  ratioSquare: "Квадрат (Пост)",
+  ratioClassic: "Классик (4:3)",
+  ratioLandscape: "Горизонт (16:9)",
 };
