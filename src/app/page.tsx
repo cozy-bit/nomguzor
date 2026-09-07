@@ -194,21 +194,49 @@ export default function HomePage() {
           onResetFilters={hasActiveFilters ? handleResetFilters : undefined}
         />
 
-        {/* Load More Button (+36 per click) */}
-        {filteredNames.length > visibleCount && (
-          <div className="mt-10 flex flex-col items-center justify-center gap-2">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleLoadMore}
-              className="gap-2 px-8 border-slate-300 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500"
-            >
-              <span>Боз нишон додан</span>
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-            <p className="text-xs text-slate-400">
-              Намоиши {displayedNames.length} аз {filteredNames.length} ном (+{Math.min(PAGE_SIZE, filteredNames.length - visibleCount)})
-            </p>
+        {/* Pagination Section (Explicit button, no infinite scroll) */}
+        {filteredNames.length > PAGE_SIZE && (
+          <div className="mt-12 flex flex-col items-center justify-center gap-3">
+            {/* Indicator: Нишон дода шуд: X аз Y */}
+            <div className="flex flex-col items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+              <p className="font-medium">
+                Нишон дода шуд:{" "}
+                <strong className="text-slate-800 dark:text-slate-200">
+                  {displayedNames.length}
+                </strong>{" "}
+                аз{" "}
+                <strong className="text-slate-800 dark:text-slate-200">
+                  {filteredNames.length}
+                </strong>
+              </p>
+              {/* Sleek progress bar */}
+              <div className="h-1.5 w-48 overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-800">
+                <div
+                  className="h-full rounded-full bg-emerald-500 transition-all duration-300"
+                  style={{
+                    width: `${Math.min(
+                      100,
+                      Math.round(
+                        (displayedNames.length / filteredNames.length) * 100
+                      )
+                    )}%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Load More Button (hidden when all names are displayed) */}
+            {filteredNames.length > visibleCount && (
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={handleLoadMore}
+                className="mt-1 gap-2 rounded-2xl border-slate-300 px-8 py-2.5 font-semibold text-slate-800 hover:border-emerald-500 hover:bg-emerald-50/70 hover:text-emerald-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-emerald-500 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 shadow-xs transition-all active:scale-95"
+              >
+                <span>Боз нишон додан</span>
+                <ChevronDown className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+              </Button>
+            )}
           </div>
         )}
       </section>
