@@ -85,6 +85,9 @@ export function Header() {
 
         {/* Right Action Controls */}
         <div className="relative z-50 flex items-center gap-2 sm:gap-2.5">
+          {/* Theme Toggle Button (always visible on both desktop and mobile, placed to the left of language on desktop and left of burger on mobile) */}
+          <ThemeToggle />
+
           {/* Desktop Language Switcher (hidden on mobile, shown on md+) */}
           <div className="hidden md:flex items-center rounded-xl border border-slate-200 bg-slate-100 p-1 shadow-inner dark:border-zinc-800 dark:bg-zinc-900/90">
             {locales.map((loc) => {
@@ -122,9 +125,6 @@ export function Header() {
               </span>
             )}
           </Link>
-
-          {/* Theme Toggle Button (always visible on both desktop and mobile) */}
-          <ThemeToggle />
 
           {/* Mobile Burger Menu Button (visible on mobile only, hidden on md+) */}
           <button
